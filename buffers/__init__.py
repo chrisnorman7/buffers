@@ -1,7 +1,14 @@
 """Provides the Buffer and Container classes."""
 
+from attr import attrs, attrib, Factory
+
+@attrs
 class Buffer:
     """A buffer of information."""
+
+    name = attrib(default=Factory(lambda: None))
+    items = attrib(default=Factory(list))
+    position = attrib(default=Factory(lambda: None))
 
     def get_current_item(self):
         """Get the current item."""
@@ -99,15 +106,13 @@ class Buffer:
         """Return the number of items this buffer holds."""
         return len(self.items)
 
-    def __init__(self, name):
-        """Set the name."""
-        self.name = name
-        self.items = []
-        self.position = None
 
-
+@attrs
 class Container:
     """A container for 0 or more buffers."""
+
+    buffers = attrib(default=Factory(list))
+    buffer = attrib(default=Factory(lambda: None))
 
     def next_buffer(self, wrap = True):
         """
@@ -181,8 +186,3 @@ class Container:
     def buffer_dict(self):
         """Return a dictionary of name: buffer pares."""
         return {x.name: x for x in self.buffers}
-
-    def __init__(self):
-        """Initialise the container."""
-        self.buffers = []
-        self.buffer = None
