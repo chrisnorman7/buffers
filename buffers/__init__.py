@@ -78,7 +78,7 @@ class Buffer:
 
     def append_item(self, item):
         """Append an item to self.items."""
-        self.items.append(item)
+        self.insert_item(-1, item)
 
     def prepend_item(self, item):
         """Push an item at the start of self.items."""
@@ -90,7 +90,7 @@ class Buffer:
     def insert_item(self, position, item):
         """Insert the provided item at the provided position."""
         if position == -1:
-            return self.append_item(item)
+            self.items.append(item)
         else:
             self.items.insert(position, item)
 
