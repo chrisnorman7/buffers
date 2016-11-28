@@ -6,7 +6,7 @@ from attr import attrs, attrib, Factory
 class Buffer:
     """A buffer of information."""
 
-    name = attrib(default=Factory(lambda: None))
+    name = attrib()
     items = attrib(default=Factory(list))
     position = attrib(default=Factory(lambda: None))
 
