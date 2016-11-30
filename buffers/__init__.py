@@ -12,7 +12,10 @@ class Buffer:
 
     def get_current_item(self):
         """Get the current item."""
-        return self.get_item(self.position)
+        if self.position is None:
+            return self.get_first_item()
+        else:
+            return self.get_item(self.position)
 
     def get_next_item(self, wrap = True):
         """
@@ -22,6 +25,8 @@ class Buffer:
 
         If wrap evaluates to False, RuntimeError will be raised.
         """
+        if self.position is None:
+            self.position = -1
         position = self.position + 1
         if position >= self.length():
             if wrap:
@@ -39,6 +44,8 @@ class Buffer:
 
         If wrap evaluates to False, RuntimeError will be raised.
         """
+        if self.position is None:
+            self.position = 0
         position = self.position - 1
         if position < 0:
             if wrap:
